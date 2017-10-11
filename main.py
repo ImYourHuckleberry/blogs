@@ -11,8 +11,8 @@ db = SQLAlchemy(app)
 class Blog(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), unique=True)
-    body = db.Column(db.String(1000))
+    title = db.Column(db.String(120), unique=False)
+    body = db.Column(db.String(99999))
        
     def __init__(self, title, body):
         self.title = title
@@ -42,12 +42,13 @@ def add_blog():
         blog_body = request.form['body']
         title_error = ''
         body_error = ''
+        
 
-    if len(blog_body) < 1:
+    if len(blog_title) < 1:
         title_error = 'Bad Title'
 
     if len(blog_body) < 1:
-        body_error = 'Bad body'
+        body_error = 'Bad Body'
 
     if not title_error and not body_error:
         new_blog = Blog(blog_title, blog_body)
@@ -57,9 +58,7 @@ def add_blog():
         return redirect(query_param_url)
 
     else:
-        return render_template('newpost.html',title='Add a Blog Entry'
-                                             ,title_error=title_error  
-                                             ,body_error=body_error)
+        return render_template('newpost.html',title='Add a Blog Entry', title_error=title_error, body_error=body_error)
 
 if __name__ == '__main__':
     app.run()

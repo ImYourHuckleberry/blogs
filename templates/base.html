@@ -2,7 +2,9 @@
 <html>
     <head>
         <title>{{title}}</title>
-        
+        <style>
+            .error {color: red;}
+        </style>
     </head>
 <body>
     <div>
@@ -10,9 +12,7 @@
         <a href="/newpost">Add a Blog Entry</a>
     </div>
     {% block content %}
-    <style>
-        .error {color: red;}
-    </style>
+    
     {% endblock %}
 
 </body>

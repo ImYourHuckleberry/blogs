@@ -1,10 +1,23 @@
-#there are four out comes
-#username and password are correct,
-    #go to /newpost
-#username is right, password is wrong
-    #go to /login, ivalid password
-#username wrong, password right 
-    #go to /login, invalid username
-#User does not have an account and 
-#clicks "Create Account" and is 
-#directed to the /signup page. 
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Log in to your blog!</h1>
+<p>If you don't have an account, you may <a href="/signup">create one</a>.</p>
+<form action="/login" method="post">
+    <table>
+        <tr>
+            <td><label for="email">Email</label></td>
+            <td>
+                <input name="email" type="email" value="{{ email }}">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>
+                <input name="password" type="password">
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Log In">
+</form>
+{% endblock %}

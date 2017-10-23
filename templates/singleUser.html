@@ -1,8 +1,15 @@
-#used to display only the blogs
-#associated with a single given author
-#It will be used when we dynamically 
-#generate a page using a GET request 
-#with a user query parameter on the 
-#/blog route (similar to how we 
-#dynamically generated individual blog 
-#entry pages in the last assignment).
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for post in posts %}
+        <h1><a href="./blog?id={{post.id}}">{{post.title}}</a></h1>
+        <p>{{post.body}}</p>
+        
+        <div>by <a href="./blog?user={{user.id}}">{{post.owner.email}}</a></div>
+
+        <hr />
+    {% endfor %}
+
+
+{% endblock %}

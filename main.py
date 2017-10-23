@@ -49,7 +49,9 @@ def index():
 
 @app.route('/blog', methods = ['POST', 'GET'])
 def blog():
-    owner = User.query.filter_by(email=session['email']).first()
+    
+    
+
 
     if request.args.get("id"):
         blog_id = request.args.get('id')
@@ -65,7 +67,7 @@ def blog():
 
     else:
         posts = Blog.query.all()
-        return render_template('blog_home.html', title="Build Your Blog", posts=posts, owner=owner)
+        return render_template('blog_home.html', title="Build Your Blog", posts=posts)
 
 @app.route('/new_entry', methods=['GET', 'POST'])
 def new_entry():

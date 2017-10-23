@@ -49,7 +49,7 @@ def index():
 
 @app.route('/blog', methods = ['POST', 'GET'])
 def blog():
-    
+    owner = User.query.filter_by(email=session['email']).first()
     
 
 
@@ -67,7 +67,7 @@ def blog():
 
     else:
         posts = Blog.query.all()
-        return render_template('blog_home.html', title="Build Your Blog", posts=posts)
+        return render_template('blog_home.html', title="Build Your Blog", posts=posts, owner=owner)
 
 @app.route('/new_entry', methods=['GET', 'POST'])
 def new_entry():
@@ -88,13 +88,13 @@ def new_entry():
         if len(body) < 1:
             body_err = "Add some post content."
 
-        if not title_err and not body_err:
-            blog = Blog(title, body, owner)
-            db.session.add(blog)
-            db.session.commit()
+    if not title_err and not body_err:
+        blog = Blog(title, body, owner)
+        db.session.add(blog)
+        db.session.commit()
             
-            id = blog.id
-            id_str = str(id)
+        id = blog.id
+        id_str = str(id)
         return redirect('/blog?id=' + id_str)
 
     else:
